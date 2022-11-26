@@ -4,13 +4,13 @@ import telnetlib
 
 BLOCK_SIZE = 16
 # First take a look at the server. Afterwards, comment out the next three lines...
-#t = telnetlib.Telnet("itsec.sec.in.tum.de", 7023)
-#t.interact()
-#sys.exit(0)
+t = telnetlib.Telnet("itsec.sec.in.tum.de", 7023)
+t.interact()
+sys.exit(0)
 
 # If you have done that, copy over a hexlified message + IV over to this script (replacing the zeros)
-iv = binascii.unhexlify("8a35c5ee7d333227a216340090fb0f3c")
-msg = binascii.unhexlify("20ed304fe76e08ceeabe2cce810a1d2cd1163075d8c53f8cbdd061aaa6d356b7f5d3b23fa2a1135872e01114e277ca33019d98a7edd4f6771a5e56829ef1fbbe")
+iv = binascii.unhexlify("9af631d39d7bfbb2bac19f593d6dafde")
+msg = binascii.unhexlify("11fe821ea34d9492f4da11ce78eb6a33ff889d88b1b8878d4235e76fd75da36ea7ba0ff74c7698154d1dcfe9a9ac3964142fdf6c28c96307bf967ed0736998c9")
 
 def read_until(s, token):
     """Reads from socket `s` until a string `token` is found in the response of the server"""
@@ -104,6 +104,7 @@ for i in range(BLOCK_SIZE):
             #print(str(j) + " " + str(response))
             intermediate[- 1 - i] = j ^ (i+1)
             plaintext[-BLOCK_SIZE * 3 - 1 - i] = new_iv[ - 1 - i] ^ intermediate[- 1 - i]
+            print(plaintext)
             #print(hex(int.from_bytes(plaintext, byteorder='big')))
             found = True
             break
